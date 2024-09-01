@@ -9,7 +9,7 @@ import { useParams, useSearchParams } from "next/navigation";
 import BusinessList from './BusinessList';
 
 
-const categoryList = () => {
+const CategoryList = () => {
   const [categoryList, setCategoryList] = useState<any[]>([]);
   const listRef = useRef<HTMLDivElement | null>(null);
  const params=useSearchParams();
@@ -79,4 +79,4 @@ useEffect(()=> {
   );
 };
 
-export default categoryList;
+export default CategoryList;

@@ -3,7 +3,7 @@
 import GlobalApi from "@/app/_utils/GlobalApi";
 import { useUser } from "@clerk/nextjs";
 import moment from "moment";
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import {
   Accordion,
   AccordionContent,
@@ -39,11 +39,7 @@ function MyOrders() {
   const { user } = useUser();
   const [orderList, setOrderList] = React.useState<OrderProps[]>([]);
 
-  useEffect(() => {
-    user && GetUserOrders();
-  }, [user]);
-
-  const GetUserOrders = () => {
+  const GetUserOrders = useCallback(() => {
     GlobalApi.GetUserOrders(user?.primaryEmailAddress?.emailAddress ?? "").then(
       (resp: any) => {
         setOrderList(resp?.orders);
@@ -53,7 +49,12 @@ function MyOrders() {
         console.log(orderList, "desde");
       }
     );
-  };
+  }, [user]);
+
+  useEffect(() => {
+    user && GetUserOrders();
+  }, [user, GetUserOrders]);
+
   return (
     <div>
       <h2 className="font-bold text-lg">My Orders</h2>
@@ -61,7 +62,7 @@ function MyOrders() {
         {orderList &&
           orderList.map((order, index) => (
             <div
-              key={index}
+              key={order.id} // Use a unique key, such as order.id
               className="p-3 border rounded-lg flex flex-col gap-3"
             >
               <h2 className="font-bold">
@@ -87,13 +88,16 @@ function MyOrders() {
                   <AccordionContent>
                     <div className="flex flex-col gap-3">
                       {order.orderDetail.map((item, index) => (
-                        <div className="flex justify-between">
+                        <div key={index} className="flex justify-between">
                           <h2>{item.name} </h2>
                           <h2>${item.price}</h2>
                         </div>
                       ))}
                       <hr />
-                      <h2 className="font-bold justify-between text-md mt-2">Total Order Amount (Including Taxes):<span>${order.orderAmount.toFixed(2)}</span> </h2>
+                      <h2 className="font-bold justify-between text-md mt-2">
+                        Total Order Amount (Including Taxes):
+                        <span>${order.orderAmount.toFixed(2)}</span>
+                      </h2>
                     </div>
                   </AccordionContent>
                 </AccordionItem>

@@ -43,17 +43,17 @@ function BusinessItem({ business }: { business: Business }) {
       />
       <div className="mt-2">
         <h2 className="font-bold text-lg flex justify-between">
-          {business.name}
+          {business?.name}
         </h2>
         <div className="flex justify-between  items-center">
           <div className="flex gap-2 items-center">
             <Image src="/start.png" alt="start" width={14} height={14} />
             <label className="text-gray-400 text-sm">{calculateRating()} </label>
             <h2 className="text-gray-400 text-sm">
-              {business?.restroType[0].name}{" "}
+              {business?.restroType[0].name}
             </h2>
           </div>
-          <h2 className="text-sm text-primary">{business.categories[0].name}</h2>
+          <h2 className="text-sm text-primary">{business?.categories[0]?.name}</h2>
         </div>
 
         <div></div>

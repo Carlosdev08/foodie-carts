@@ -48,14 +48,15 @@ const Header = () => {
   return (
     <div className="flex justify-between items-center p-4 md:px-10 shadow-sm cursor-pointer">
       <div>
-        <Image
-          src="/logoheader.png"
-          alt="foodie Cart"
-          width={200}
-          height={200}
-          className="p-4 min-w-6"
-          onClick={() => router.replace("/")}
-        />
+        <Link href={"/"}>
+          <Image
+            src="/logoheader.png"
+            alt="foodie Cart"
+            width={200}
+            height={200}
+            className="p-4 min-w-6"
+          />
+        </Link>
       </div>
 
       <div className="hidden md:flex border p-2 rounded-lg bg-gray-100 w-96">
@@ -83,29 +84,29 @@ const Header = () => {
             </PopoverContent>
           </Popover>
           {/* <UserButton /> */}
-          
+
           <DropdownMenu>
             <DropdownMenuTrigger>
-            <Image
-            src={user?.imageUrl}
-            alt="user"
-            width={35}
-            height={35}
-            className="rounded-full cursor-pointer"
-          />
+              <Image
+                src={user?.imageUrl}
+                alt="user"
+                width={35}
+                height={35}
+                className="rounded-full cursor-pointer"
+              />
             </DropdownMenuTrigger>
             <DropdownMenuContent>
               <DropdownMenuLabel>My Account</DropdownMenuLabel>
               <DropdownMenuSeparator />
-             <Link href={'/user'}>
-              <DropdownMenuItem>Profile</DropdownMenuItem>
-                </Link>
-              <Link href={'/user#/my-orders'}> 
-              <DropdownMenuItem>My Orders</DropdownMenuItem>
-              </Link> 
+              <Link href={"/user"}>
+                <DropdownMenuItem>Profile</DropdownMenuItem>
+              </Link>
+              <Link href={"/user#/my-orders"}>
+                <DropdownMenuItem>My Orders</DropdownMenuItem>
+              </Link>
               <SignInButton>
                 <DropdownMenuItem>Logout</DropdownMenuItem>
-                </SignInButton> 
+              </SignInButton>
             </DropdownMenuContent>
           </DropdownMenu>
         </div>

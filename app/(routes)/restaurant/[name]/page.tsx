@@ -12,11 +12,6 @@ interface Banner {
   productImage?: string;
 }
 
-// Define the interface for RestaurantProps
-interface RestaurantProps {
-  banner: Banner;
-}
-
 // Define the interface for Restaurant
 interface Restaurant {
   slug: string;
@@ -27,12 +22,7 @@ interface Restaurant {
   reviews: { star: number }[];
 }
 
-// Define the interface for PageProps
-interface PageProps {
-  banner: Banner;
-}
-
-function RestaurantDetail({ banner }: PageProps) {
+function RestaurantDetail() {
   const pathname = usePathname();
   const [restaurant, setRestaurant] = useState<Restaurant>({
     slug: '',

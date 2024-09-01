@@ -8,19 +8,19 @@ import BusinessItemSkeleton from './BusinessItemSkeleton';
 function BusinessList() {
     
     const params=useSearchParams();
-    const [category, setCategory] = useState<string[]>([])
+    const [category, setCategory] = useState<any[]>([])
     const [businessList, seBusinessList]= useState<any[]>([])
     const [loading, setLoading] = useState(false)
 
     useEffect(() =>{
       const categoy = params.get('category')
-      params && categoy && setCategory([categoy]);
+        params&&setCategory(categoy?[categoy]: ['all']);
         params&&GetBusinessList(params.get('category'))
     },[params])
 
-    const GetBusinessList =(category:any) => {
+    const GetBusinessList =(category_:any) => {
       setLoading(true)
-      GlobalApi.GetBusiness(category).then((resp: any)=>{
+      GlobalApi.GetBusiness(category_).then((resp: any)=>{
        
         seBusinessList(resp?.restaurants)
         setLoading(false)
@@ -29,7 +29,7 @@ function BusinessList() {
   return (
     <div className='mt-5'>
 
-      <h2 className='font-medium text-2xl'>Popular {category} Restaurants</h2>
+      <h2 className='font-medium text-2xl'>Popular {businessList[0]?.name} Restaurants</h2>
       <h2 className='font-bold text-primary'>{businessList?.length} Results</h2>
       <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mt-3'>
         {!loading? businessList.map((restaurants,index)=>(
