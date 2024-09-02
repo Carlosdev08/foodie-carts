@@ -1,9 +1,10 @@
 "use client";
 import React, { useEffect, useState } from 'react';
-import { usePathname } from 'next/navigation';
+import { usePathname, useParams } from 'next/navigation';
 import GlobalApi from '@/app/_utils/GlobalApi';
 import Intro from '../_components/Intro';
 import Tabs from '../_components/Tabs';
+
 
 // Define the common interface for Banner
 interface Banner {

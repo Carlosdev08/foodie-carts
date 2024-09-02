@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useCallback } from "react";
 import Image from "next/image";
 import { Input } from "@/components/ui/input";
 import { Search, ShoppingCart } from "lucide-react";
@@ -35,16 +35,19 @@ const Header = () => {
   const { updateCart, setUpdateCart } = useContext(CartUpdateContext) || {};
   const [cart, setCart] = useState<string[]>([]);
 
-  useEffect(() => {
-    user && GetUserCart();
-  }, [user && updateCart]);
-
-  const GetUserCart = async () => {
+  const GetUserCart = useCallback(async () => {
     const response: CartResponse = (await GlobalApi.GetUserCart(
       user?.primaryEmailAddress?.emailAddress ?? ""
     )) as CartResponse;
     setCart(response?.userCarts || []);
-  };
+  }, [user]);
+
+  useEffect(() => {
+    if (user) {
+      GetUserCart();
+    }
+  }, [user, updateCart, GetUserCart]);
+
   return (
     <div className="flex justify-between items-center p-4 md:px-10 shadow-sm cursor-pointer">
       <div>
