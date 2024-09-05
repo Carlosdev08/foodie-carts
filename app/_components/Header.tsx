@@ -51,7 +51,7 @@ const Header = () => {
   return (
     <div className="flex justify-between items-center p-4 md:px-10 shadow-sm cursor-pointer">
       <div>
-        <Link href={"/"}>
+        <Link href={'/'}>
           <Image
             src="/logoheader.png"
             alt="foodie Cart"
@@ -62,11 +62,11 @@ const Header = () => {
         </Link>
       </div>
 
-      <div className="hidden md:flex border p-2 rounded-lg bg-gray-100 w-96">
-        <Input
+      <div className=" md:flex border p-2 rounded-lg bg-gray-100 w-96">
+        <input
           type="text"
           placeholder="Search"
-          className="bg-transparent w-full outline-transparent"
+          className="bg-transparent w-full outline-none"
         />
         <Search className="flex justify-center items-center m-2 rounded-xl text-primary" />
       </div>

@@ -22,7 +22,7 @@ const GetCategory = async () => {
   const result = await request(MASTER_URL, query);
   return result;
 };
-const GetBusiness = async (category: any) => {
+const GetBusiness = async (category: string) => {
   const query =
     gql`
   query GetBusiness {
@@ -47,6 +47,7 @@ const GetBusiness = async (category: any) => {
     }
   }
 }
+
 
     `;
   const result = await request(MASTER_URL, query);
@@ -161,9 +162,12 @@ const GetUserCart = async (userEmail: any) => {
 };
 
 const DisconnectRestaurantFromCartItem = async (id: any) => {
-  const query = gql`
+  const query =
+    gql`
 mutation DisconnectRestaurantFromCartItem {
-  updateUserCart(data: {restaurant: {disconnect: true}}, where: {id: "`+id+`"}) {
+  updateUserCart(data: {restaurant: {disconnect: true}}, where: {id: "` +
+    id +
+    `"}) {
     id
   }
   publishManyUserCarts(to: PUBLISHED) {
@@ -183,9 +187,12 @@ mutation DisconnectRestaurantFromCartItem {
 };
 
 const DeleteItemFromCart = async (id: any) => {
-  const query = gql`
+  const query =
+    gql`
 mutation DeleteCartItem {
-  deleteUserCart(where: {id: "` +id+`"}) {
+  deleteUserCart(where: {id: "` +
+    id +
+    `"}) {
     id
   }
 }
@@ -364,9 +371,12 @@ const UpdateOrderToAddOrderItems = async (
 };
 
 const GetUserOrders = async (email: string) => {
-  const query = gql`
+  const query =
+    gql`
   query UseOrders {
-  orders(where: {email: "`+email+`"}, orderBy: publishedAt_DESC) {
+  orders(where: {email: "` +
+    email +
+    `"}, orderBy: publishedAt_DESC) {
     address
     createdAt
     email
@@ -385,11 +395,10 @@ const GetUserOrders = async (email: string) => {
     zipCode
   }
 }
-`
-const result = await request(MASTER_URL, query);
-return result;
-
-}; 
+`;
+  const result = await request(MASTER_URL, query);
+  return result;
+};
 
 export default {
   GetCategory,

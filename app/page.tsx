@@ -10,13 +10,10 @@ import BusinessList from "./_components/BusinessList";
 import User from "./(routes)/user/page";
 
 export default function Home() {
-
   return (
     <div>
       <CategoryList />
       <BusinessList />
-    
-      
     </div>
   );
 }
